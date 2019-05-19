@@ -14,7 +14,7 @@ production:
   script:
   - apt-get update -yqqq
   - pip install awscli
-  - aws s3 sync --sse --delete ./ s3://$S3_BUCKET/ --acl public-read
+  - aws s3 sync --sse --exclude ".git/*" --delete ./ s3://$S3_BUCKET/ --acl public-read
   - aws configure set preview.cloudfront true
   - aws cloudfront create-invalidation --distribution-id $CF_DISTID --paths '/*'
   environment:
